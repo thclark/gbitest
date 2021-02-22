@@ -35,10 +35,10 @@ const BackgroundSection = ({ className, children }) => {
 
   const imageData = desktop.childImageSharp.fluid
   return (
-    <StyledFullScreenWrapper>
-      <StyledSymetryWrapper>
+    // The container height is the full viewport height
+    <section style={{ width: '100%', height: '100vh' }}>
         <BackgroundImage
-          Tag="section"
+          Tag="div"
           className={className}
           // To style via external CSS see layout.css last examples:
           // className="test"
@@ -65,53 +65,15 @@ const BackgroundSection = ({ className, children }) => {
         >
           {children}
         </BackgroundImage>
-      </StyledSymetryWrapper>
-      <StyledSymetryWrapper>
-        <StyledWelcomeImage
-          fluid={imageData}
-          backgroundColor={`#040e18`}
-          objectFit="cover"
-          objectPosition="50% 50%"
-        />
-      </StyledSymetryWrapper>
-    </StyledFullScreenWrapper>
+    </section>
   )
 }
 
-const StyledSymetryWrapper = styled.div`
-  width: 50vw;
-  height: 100%;
-  overflow: hidden;
-`
-
-const StyledWelcomeImage = styled(Img)`
-  width: 100vw;
-  height: auto;
-`
-
 const StyledBackgroundSection = styled(BackgroundSection)`
   width: 100vw;
-  
-  // These three crucial styles (if existing) are directly parsed and added to 
-  // the pseudo-elements without further ado (except when overwritten).
-  //background-repeat: repeat-y;
-  //background-position: left center;
-  //background-size: cover;
-  
-  // With media-queries you have to overwrite the default options (see style={{}} above).
-  // ${media.lessThan('large')`
-  //   background-size: cover;
-  //   &:after, &:before {
-  //     background-size: contain;
-  //   }
-  // `}
-  
-  // For pseudo-elements you have to overwrite the default options (see style={{}} above).
-  // See: https://github.com/timhagn/gatsby-background-image/#styling--passed-through-styles 
-  //&:after, &:before {
-  //   background-clip: content-box;
-  //   background-size: contain;
-  //}
+  // TO REPRODUCE:
+  // Comment / Uncomment the following line and save the file while hot reloading
+  height: 100%; // Loads as 100% of its container height
 `
 
 export default StyledBackgroundSection
